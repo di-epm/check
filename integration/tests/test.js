@@ -16,7 +16,7 @@ describe('github', function () {
   it('should find hermione', async function () {
     await this.browser.url('http://localhost:3000');
 
-    this.browser.waitUntil(() => this.browser.$('pre').isExisting(), { timeoutMsg: 'Applictin should render tag `pre`' })
+    // this.browser.waitUntil(() => this.browser.$('pre').isExisting(), { timeoutMsg: 'Appliction should render tag `pre`' })
 
     await fs.writeFile('screenshots/page-0.png', Buffer.from(await this.browser.takeScreenshot(), 'base64'));
 
