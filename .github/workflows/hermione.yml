@@ -48,7 +48,7 @@ jobs:
         npm i -g serve 
         cmd /c start "" serve -s -l 3000 ${{env.DIR_SITE}}
         echo "Wait a bit"
-        timeout 5
+        ping -n 5 127.0.0.1
 
     - name: Test
       run: npm test
