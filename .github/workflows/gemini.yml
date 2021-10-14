@@ -34,6 +34,10 @@ jobs:
         cache: 'npm'
         cache-dependency-path: "./git/${{env.DIR_INT}}"
     
+    - uses: actions/setup-python@v2
+      with:
+        python-version: '2.x'
+    
     - name: Install dependencies
       run: npm i
       working-directory: "git/${{env.DIR_INT}}"
