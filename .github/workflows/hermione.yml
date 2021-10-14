@@ -36,6 +36,11 @@ jobs:
         cache: 'npm'
         cache-dependency-path: "./git/${{env.DIR_INT}}"
     
+    - name: Setup .NET
+      uses: actions/setup-dotnet@v1
+      with:
+        dotnet-version: 5.0.x
+    
     - name: Install dependencies
       run: npm i
       working-directory: "git/${{env.DIR_INT}}"
@@ -48,7 +53,7 @@ jobs:
         cmd /c rem start "" ${{env.DIR_API}}/api.exe
         echo "Starting site"
         npm i -g serve 
-        cmd /c start "" serve -s -l 3000 ${{env.DIR_SITE}}
+        cmd /c serve -s -l 3000 ${{env.DIR_SITE}}
         echo "Wait a bit"
         ping -n 5 127.0.0.1
 
