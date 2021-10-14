@@ -27,15 +27,15 @@ jobs:
 
     - name: Restore dependencies
       run: dotnet restore
-      working-directory: "${{env.DIR_DOTNET}}"
+      working-directory: "${{env.DIR_API}}"
       
     - name: Build
       run: dotnet build --no-restore
-      working-directory: "${{env.DIR_DOTNET}}"
+      working-directory: "${{env.DIR_API}}"
       
     - name: Test
       run: dotnet test --no-build --verbosity normal
-      working-directory: "${{env.DIR_DOTNET}}"
+      working-directory: "${{env.DIR_API}}"
 
     - name: Archive production artifacts
       uses: actions/upload-artifact@v2
