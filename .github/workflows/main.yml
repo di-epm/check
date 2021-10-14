@@ -112,7 +112,7 @@ jobs:
         cmd /c rem start "" ${{env.DIR_API}}/api.exe
         cmd /c start "" notepad.exe
         echo "Starting site"
-        npm i -g serve 
+        cmd /c npm i -g serve 
         cmd /c start "" serve -s -l 3000 "${{env.DIR_SITE}}"
         echo "Wait a bit"
         ping -n 5 127.0.0.1
