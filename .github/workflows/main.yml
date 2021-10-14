@@ -83,6 +83,7 @@ jobs:
 
   test-integration:
     runs-on: windows-latest
+    needs: [build-api, build-site]
     
     steps:
     - uses: actions/checkout@v2
