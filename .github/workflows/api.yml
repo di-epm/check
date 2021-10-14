@@ -1,4 +1,4 @@
-name: .NET
+name: api
 
 env:
   DIR_API: "api"
