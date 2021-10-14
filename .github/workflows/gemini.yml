@@ -38,6 +38,10 @@ jobs:
       with:
         python-version: '3.x'
     
+    - uses: microsoft/setup-msbuild@v1.0.3
+      with:
+        vs-version: '[17.0,18.0)'
+    
     - name: Install dependencies
       run: npm config set msvs_version 2017 && npm i
       working-directory: "git/${{env.DIR_INT}}"
