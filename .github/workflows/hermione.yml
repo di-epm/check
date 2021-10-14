@@ -39,7 +39,11 @@ jobs:
       working-directory: "git/${{env.DIR_INT}}"
       
     - name: Run selenium, api and site
-      run: cmd /c "start "" selenium-standalone start && npm i -g serve && start "" serve -s -l 3000 ${{env.DIR_SITE}} && start "" ${{env.DIR_API}}/api.exe"
+      run: |
+        cmd /c start "" selenium-standalone start 
+        npm i -g serve 
+        cmd /c start "" serve -s -l 3000 ${{env.DIR_SITE}}
+        cmd /c start "" ${{env.DIR_API}}/api.exe
 
     - name: Test
       run: npm test
