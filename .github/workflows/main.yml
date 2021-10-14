@@ -160,7 +160,7 @@ jobs:
         echo "Starting site"
         # npm i -g serve
         # serve -s -l 3000 "${{env.DIR_SITE}}" &
-        npm i http-server
+        npm i -g http-server
         http-server -p 3000 ${{env.DIR_SITE}}
         echo "Wait a bit"
         ping -n 15 127.0.0.1
