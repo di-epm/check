@@ -7,6 +7,7 @@ env:
   DIR_SCREENS: "integration/screenshots"
   ART_API: "api-${{github.sha}}"
   ART_SITE: "site-${{github.sha}}"
+  ART_SCREENS: "screenshots-${{github.sha}}"
 
 on:
   # Triggers the workflow on push or pull request events but only for the master branch
@@ -55,13 +56,9 @@ jobs:
       run: npm test
       working-directory: "git/${{env.DIR_INT}}"
 
-    - name: Display structure of downloaded files
-      if: always()
-      run: ls -R
-
     - name: Create artifacts
       if: ${{!cancelled()}}
       uses: actions/upload-artifact@v2
       with:
-        name: "${{env.ART_API}}"
-        path: "${{env.DIR_API}}/bin/Debug/net5.0/**"
+        name: "${{env.ART_SCREENS}}"
+        path: "git/${{env.DIR_SCREENS}}"
