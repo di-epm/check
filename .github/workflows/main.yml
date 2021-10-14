@@ -1,4 +1,4 @@
-name: api
+name: CI
 
 env:
   DIR_API: "api"
@@ -42,7 +42,7 @@ jobs:
       run: dotnet test --no-build --verbosity normal
       working-directory: ${{env.DIR_API}}
 
-    - name: Archive production artifacts
+    - name: Create artifacts
       uses: actions/upload-artifact@v2
       with:
         name: "${{env.ART_API}}"
@@ -61,16 +61,19 @@ jobs:
         cache: 'npm'
         cache-dependency-path: "./${{env.DIR_SITE}}"
     
-    - run: npm ci
+    - name: Install dependencies
+      run: npm ci
       working-directory: ${{env.DIR_SITE}}
     
-    - run: npm run test:ci
+    - name: Test
+      run: npm run test:ci
       working-directory: ${{env.DIR_SITE}}
 
-    - run: npm run build
+    - name: Build
+      run: npm run build
       working-directory: ${{env.DIR_SITE}}
     
-    - name: Archive production artifacts
+    - name: Create artifacts
       uses: actions/upload-artifact@v2
       with:
         name: "${{env.ART_SITE}}"
@@ -81,6 +84,10 @@ jobs:
     needs: [build-api, build-site]
     
     steps:
+    - uses: actions/checkout@v2
+      with:
+        path: git
+    
     - uses: actions/download-artifact@v2
       with:
         name: ${{env.ART_API}}
@@ -90,6 +97,10 @@ jobs:
       with:
         name: ${{env.ART_SITE}}
         path: ${{env.DIR_SITE}}
+
+    - name: Test
+      run: npm test
+      working-directory: "git/${{env.DIR_INT}}"
 
     - name: Display structure of downloaded files
       run: ls -R
