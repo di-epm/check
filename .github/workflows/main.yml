@@ -81,7 +81,7 @@ jobs:
         name: "${{env.ART_SITE}}"
         path: "${{env.DIR_SITE}}/build"
 
-  test-integration:
+  test-integration-windows:
     runs-on: windows-latest
     needs: [build-api, build-site]
     
@@ -130,3 +130,50 @@ jobs:
         name: "${{env.ART_SCREENS}}"
         path: "git/${{env.DIR_SCREENS}}"
 
+  test-integration-linux:
+    runs-on: ubuntu-latest
+    needs: [build-api, build-site]
+    
+    steps:
+    - uses: actions/checkout@v2
+      with:
+        path: git
+    
+    - name: Setup Node.js
+      uses: actions/setup-node@v2
+      with:
+        node-version: '16'
+        cache: 'npm'
+        cache-dependency-path: "./git/${{env.DIR_INT}}"
+    
+    - name: Setup .NET
+      uses: actions/setup-dotnet@v1
+      with:
+        dotnet-version: 5.0.x
+    
+    - name: Install dependencies
+      run: npm i
+      working-directory: "git/${{env.DIR_INT}}"
+      
+    - name: Run selenium, api and site
+      run: |
+        echo "Starting selenium"
+        selenium-standalone start &
+        echo "Starting api"
+        # ./${{env.DIR_API}}/api.exe &
+        echo "Starting site"
+        npm i -g serve
+        serve -s -l 3000 ${{env.DIR_SITE}} &
+        echo "Wait a bit"
+        ping -n 5 127.0.0.1
+
+    - name: Test
+      run: npm test
+      working-directory: "git/${{env.DIR_INT}}"
+
+    - name: Create artifacts
+      if: ${{!cancelled()}}
+      uses: actions/upload-artifact@v2
+      with:
+        name: "${{env.ART_SCREENS}}"
+        path: "git/${{env.DIR_SCREENS}}"
