@@ -41,6 +41,10 @@ jobs:
       run: npm i
       working-directory: "git/${{env.DIR_INT}}"
 
+    - name: Run selenium, api and site
+      run: |
+        start "" selenium-standalone start
+
     - name: Test
       run: npm test
       working-directory: "git/${{env.DIR_INT}}"
