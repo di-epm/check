@@ -115,7 +115,7 @@ jobs:
         cmd /c npm i -g serve 
         cmd /c start "" serve -s -l 3000 "${{env.DIR_SITE}}"
         echo "Wait a bit"
-        ping -n 5 127.0.0.1
+        ping -n 15 127.0.0.1
 
     - name: Test
       run: npm test
@@ -158,10 +158,12 @@ jobs:
         echo "Starting api"
         # ./${{env.DIR_API}}/api.exe &
         echo "Starting site"
-        npm i -g serve
-        serve -s -l 3000 "${{env.DIR_SITE}}" &
+        # npm i -g serve
+        # serve -s -l 3000 "${{env.DIR_SITE}}" &
+        npm i http-server
+        http-server -p 3000 ${{env.DIR_SITE}}
         echo "Wait a bit"
-        ping -n 5 127.0.0.1
+        ping -n 15 127.0.0.1
 
     - name: Test
       run: npm test
