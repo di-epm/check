@@ -40,7 +40,5 @@ jobs:
     - name: Archive production artifacts
       uses: actions/upload-artifact@v2
       with:
-        name: "${ART_API}"
-        path: bin/Debug/net5.0/**
-        
-    
+        name: "${{env.ART_API}}"
+        path: "${{env.DIR_API}}/bin/Debug/net5.0/**"
