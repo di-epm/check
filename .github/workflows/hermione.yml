@@ -34,16 +34,12 @@ jobs:
         cache: 'npm'
         cache-dependency-path: "./git/${{env.DIR_INT}}"
     
-    #- name: Install Chrome
-    #  uses: browser-actions/setup-chrome@latest
-    
     - name: Install dependencies
       run: npm i
       working-directory: "git/${{env.DIR_INT}}"
-
+      
     - name: Run selenium, api and site
-      run: |
-        cmd /c start "" selenium-standalone start
+      run: cmd /c "start "" selenium-standalone start && npm i -g serve && start "" serve -s -l 3000 ${{env.DIR_SITE}} && start "" ${{DIR_API}}/api.exe"
 
     - name: Test
       run: npm test
