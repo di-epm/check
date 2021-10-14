@@ -1,0 +1,12 @@
+{
+  "name": "integration",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "preinstall": "npm install -g gemini && npm install -g selenium-standalone && selenium-standalone install",
+    "test": "gemini test"
+  },
+  "author": "",
+  "license": "ISC"
+}

@@ -4,9 +4,14 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "preinstall": "npm install -g gemini && npm install -g selenium-standalone && selenium-standalone install",
-    "test": "gemini test"
+    "preinstall": "npm install -g selenium-standalone && selenium-standalone install",
+    "test": "hermione"
   },
+  "keywords": [],
   "author": "",
-  "license": "ISC"
+  "license": "ISC",
+  "dependencies": {
+    "chai": "^4.3.4",
+    "hermione": "^4.6.3"
+  }
 }
