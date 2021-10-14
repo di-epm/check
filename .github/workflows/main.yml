@@ -98,6 +98,17 @@ jobs:
         name: ${{env.ART_SITE}}
         path: ${{env.DIR_SITE}}
 
+    - name: Setup Node.js
+      uses: actions/setup-node@v2
+      with:
+        node-version: '16'
+        cache: 'npm'
+        cache-dependency-path: "./git/${{env.DIR_INT}}"
+    
+    - name: Install dependencies
+      run: npm i
+      working-directory: "git/${{env.DIR_INT}}"
+
     - name: Test
       run: npm test
       working-directory: "git/${{env.DIR_INT}}"
