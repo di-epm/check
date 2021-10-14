@@ -43,7 +43,7 @@ jobs:
 
     - name: Run selenium, api and site
       run: |
-        start "" selenium-standalone start
+        cmd /c start "" selenium-standalone start
 
     - name: Test
       run: npm test
