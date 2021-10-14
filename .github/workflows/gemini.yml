@@ -42,6 +42,9 @@ jobs:
       with:
         vs-version: '[16.0,17.0)'
     
+    - name: Install Chrome
+      uses: browser-actions/setup-chrome@latest
+    
     - name: Install dependencies
       run: npm config set msvs_version 2019 && npm i
       working-directory: "git/${{env.DIR_INT}}"
