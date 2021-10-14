@@ -108,8 +108,6 @@ jobs:
       
     - name: Run selenium, api and site
       run: |
-        echo "Starting selenium"
-        cmd /c start "" selenium-standalone start 
         echo "Starting api"
         cmd /c rem start "" ${{env.DIR_API}}/api.exe
         cmd /c start "" notepad.exe
@@ -157,8 +155,6 @@ jobs:
       
     - name: Run selenium, api and site
       run: |
-        echo "Starting selenium"
-        selenium-standalone start &
         echo "Starting api"
         # ./${{env.DIR_API}}/api.exe &
         echo "Starting site"
