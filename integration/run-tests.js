@@ -7,7 +7,7 @@
   await fs.rm(dirname, { force: true, recursive: true })
   await fs.mkdir(dirname)
 
-  const selenium = cp.exec("selenium-standalone start", { shell: true, windowsHide: false })
+  const selenium = cp.spawn("selenium-standalone start", { shell: true, stdio: 'inherit' })
   console.log("Selenium process id:", selenium.pid)
   selenium.unref()
 
