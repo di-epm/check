@@ -43,7 +43,7 @@ jobs:
         echo "Starting selenium"
         cmd /c start "" selenium-standalone start 
         echo "Starting api"
-        cmd /c start "" ${{env.DIR_API}}/api.exe
+        cmd /c rem start "" ${{env.DIR_API}}/api.exe
         echo "Starting site"
         npm i -g serve 
         cmd /c start "" serve -s -l 3000 ${{env.DIR_SITE}}
