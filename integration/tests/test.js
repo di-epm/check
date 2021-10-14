@@ -16,13 +16,15 @@ describe('github', function () {
   it('should find hermione', async function () {
     await this.browser.url('http://localhost:3000');
 
+    this.browser.waitUntil(() => this.browser.$('pre').isExisting(), { timeoutMsg: 'Applictin should render tag `pre`' })
+
     await fs.writeFile('screenshots/page-0.png', Buffer.from(await this.browser.takeScreenshot(), 'base64'));
 
     let json = await this.browser.$('pre').getText();
     assert.equal(json, 'null');
 
     await this.browser.$('button').click();
-    await this.browser.waitUntil(async () => json !== await this.browser.$('pre').getText(), { timeout: 10000, timeoutMsg: 'Data should change' })
+    await this.browser.waitUntil(async () => json !== await this.browser.$('pre').getText(), { timeoutMsg: 'Data should change' })
 
     await fs.writeFile('screenshots/page-1.png', Buffer.from(await this.browser.takeScreenshot(), 'base64'));
 
