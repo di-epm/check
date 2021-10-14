@@ -1,4 +1,4 @@
-name: CI
+name: gemini
 
 env:
   DIR_API: "api"
@@ -20,7 +20,7 @@ on:
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
   test-integration:
-    runs-on: ubuntu-latest
+    runs-on: windows-latest
     
     steps:
     - uses: actions/checkout@v2
