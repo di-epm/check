@@ -83,10 +83,12 @@ jobs:
     - uses: actions/download-artifact@v2
       with:
         name: ${{env.ART_API}}
+        path: $${env.DIR_API}
 
     - uses: actions/download-artifact@v2
       with:
         name: ${{env.ART_SITE}}
+        path: $${env.DIR_SITE}
 
     - name: Display structure of downloaded files
       run: ls -R
