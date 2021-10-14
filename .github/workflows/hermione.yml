@@ -40,14 +40,14 @@ jobs:
       
     - name: Run selenium, api and site
       run: |
-        echo Starting selenium
+        echo "Starting selenium"
         cmd /c start "" selenium-standalone start 
-        echo Starting api
+        echo "Starting api"
         cmd /c start "" ${{env.DIR_API}}/api.exe
-        echo Starting site
+        echo "Starting site"
         npm i -g serve 
         cmd /c start "" serve -s -l 3000 ${{env.DIR_SITE}}
-        echo Wait a bit
+        echo "Wait a bit"
         timeout 5
 
     - name: Test
