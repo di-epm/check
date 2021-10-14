@@ -82,43 +82,6 @@ jobs:
         path: "${{env.DIR_SITE}}/build"
 
   test-integration:
-    runs-on: ubuntu-latest
-    needs: [build-api, build-site]
-    
-    steps:
-    - uses: actions/checkout@v2
-      with:
-        path: git
-    
-    - uses: actions/download-artifact@v2
-      with:
-        name: ${{env.ART_API}}
-        path: ${{env.DIR_API}}
-
-    - uses: actions/download-artifact@v2
-      with:
-        name: ${{env.ART_SITE}}
-        path: ${{env.DIR_SITE}}
-
-    - name: Setup Node.js
-      uses: actions/setup-node@v2
-      with:
-        node-version: '16'
-        cache: 'npm'
-        cache-dependency-path: "./git/${{env.DIR_INT}}"
-    
-    - name: Install dependencies
-      run: npm i
-      working-directory: "git/${{env.DIR_INT}}"
-
-    - name: Test
-      run: npm test
-      working-directory: "git/${{env.DIR_INT}}"
-
-    - name: Display structure of downloaded files
-      run: ls -R
-
-  test-integration:
     runs-on: windows-latest
     
     steps:
