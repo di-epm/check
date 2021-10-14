@@ -1,5 +1,9 @@
 name: .NET
 
+env:
+  DIR_DOTNET: "api"
+  DIR_REACT: "cite"
+
 on:
   push:
     branches: [ master ]
@@ -19,7 +23,10 @@ jobs:
         dotnet-version: 5.0.x
     - name: Restore dependencies
       run: dotnet restore
+      working-directory: "${{env.DIR_DOTNET}}"
     - name: Build
       run: dotnet build --no-restore
+      working-directory: "${{env.DIR_DOTNET}}"
     - name: Test
       run: dotnet test --no-build --verbosity normal
+      working-directory: "${{env.DIR_DOTNET}}"
