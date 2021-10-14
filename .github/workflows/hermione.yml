@@ -4,6 +4,7 @@ env:
   DIR_API: "api"
   DIR_SITE: "site"
   DIR_INT: "integration"
+  DIR_SCREENS: "integration/screenshots"
   ART_API: "api-${{github.sha}}"
   ART_SITE: "site-${{github.sha}}"
 
@@ -55,4 +56,12 @@ jobs:
       working-directory: "git/${{env.DIR_INT}}"
 
     - name: Display structure of downloaded files
+      if: always()
       run: ls -R
+
+    - name: Create artifacts
+      if: ${{!cancelled()}}
+      uses: actions/upload-artifact@v2
+      with:
+        name: "${{env.ART_API}}"
+        path: "${{env.DIR_API}}/bin/Debug/net5.0/**"
