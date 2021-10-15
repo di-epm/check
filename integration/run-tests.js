@@ -31,17 +31,17 @@
   selenium.stderr.pipe(process.stderr, { end: false })
 
   await new Promise(resolve => {
-    let log = ''
+    let plog = ''
 
     selenium.stdout.on('data', chunk => {
       process.stdout.write(chunk)
 
-      if ((log += chunk).includes('Selenium started')) {
+      if ((plog += chunk).includes('Selenium started')) {
         // selenium.unref()
-        log("=== resolved ===", log)
+        log("=== resolved ===", plog)
         resolve()
-      } else if (log.length > 64) {
-        log = log.slice(-64)
+      } else if (plog.length > 64) {
+        plog = plog.slice(-64)
       }
     })
   })
