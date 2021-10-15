@@ -14,16 +14,16 @@
     process.stdout.write(args.map(x => util.format(x)).join(" ") + "\n")
   }
 
-  // const i = process.argv.indexOf("spawn")
-  // const prcs = i === -1 ? [] : process.argv.slice(i + 1).map(cmd => {
-  //   log("spawn", cmd)
-  //   const p = cp.spawn(cmd, { shell: true, stdio: 'ignore' })
-  //   p.unref()
-  //   log("  id:", p.pid)
-  //   return p
-  // })
+  const i = process.argv.indexOf("spawn")
+  const prcs = i === -1 ? [] : process.argv.slice(i + 1).map(cmd => {
+    log("spawn", cmd)
+    const p = cp.spawn(cmd, { shell: true, stdio: 'ignore' })
+    p.unref()
+    log("  id:", p.pid)
+    return p
+  })
 
-  // await new Promise(resolve => setTimeout(resolve, 5000))
+  await new Promise(resolve => setTimeout(resolve, 5000))
 
   const selenium = cp.spawn("selenium-standalone start", { shell: true, stdio: 'pipe' })
   log("Selenium process id:", selenium.pid)
