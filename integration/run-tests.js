@@ -37,7 +37,8 @@
       process.stdout.write(chunk)
 
       if ((log += chunk).includes('Selenium started')) {
-        selenium.unref()
+        // selenium.unref()
+        log("=== resolved ===", log)
         resolve()
       } else if (log.length > 64) {
         log = log.slice(-64)
@@ -45,6 +46,7 @@
     })
   })
 
+  log("=== before run ===")
   const hermione = cp.spawn("npm run hermione", { shell: true, stdio: 'inherit' })
   log("Hermione process id:", hermione.pid)
   hermione.on('close', code => process.exit(code))
@@ -52,6 +54,6 @@
   process.on('exit', () => {
     selenium.exitCode ?? selenium.kill()
     hermione.exitCode ?? hermione.kill()
-    for (let p of prcs) p.kill()
+    // for (let p of prcs) p.kill()
   })
 }()
