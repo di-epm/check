@@ -105,9 +105,22 @@ jobs:
     - name: Install dependencies
       run: npm i
       working-directory: "git/${{env.DIR_INT}}"
+      
+    - name: Run selenium, api and site
+      run: |
+        echo "Starting api"
+        cmd /c rem start "" ${{env.DIR_API}}/api.exe
+        cmd /c start "" notepad.exe
+        echo "Starting site"
+        cmd /c rem npm i -g serve 
+        cmd /c rem start "" serve -s -l 3000 "${{env.DIR_SITE}}"
+        cmd /c npm i -g http-server
+        cmd /c start "" http-server -p 3000 ${{env.DIR_SITE}}
+        echo "Wait a bit"
+        ping -n 15 127.0.0.1
 
     - name: Test
-      run: npm test -- spawn "serve -s -l 3000 ${{env.DIR_SITE}}"
+      run: npm test
       working-directory: "git/${{env.DIR_INT}}"
 
     - name: Create artifacts
@@ -141,9 +154,21 @@ jobs:
     - name: Install dependencies
       run: npm i
       working-directory: "git/${{env.DIR_INT}}"
+      
+    - name: Run selenium, api and site
+      run: |
+        echo "Starting api"
+        # ./${{env.DIR_API}}/api.exe &
+        echo "Starting site"
+        # npm i -g serve
+        # serve -s -l 3000 "${{env.DIR_SITE}}" &
+        npm i -g http-server
+        http-server -p 3000 ${{env.DIR_SITE}} &
+        echo "Wait a bit"
+        ping -n 15 127.0.0.1
 
     - name: Test
-      run: npm test -- spawn "serve -s -l 3000 ${{env.DIR_SITE}}"
+      run: npm test
       working-directory: "git/${{env.DIR_INT}}"
 
     - name: Create artifacts

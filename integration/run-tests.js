@@ -7,8 +7,21 @@
   await fs.rm(dirname, { force: true, recursive: true })
   await fs.mkdir(dirname)
 
+  const i = process.argv.indexOf("spawn")
+  const prcs = i === -1 ? [] : process.argv.slice(i + 1).map(cmd => {
+    console.log("spawn", cmd)
+    const p = cp.spawn(cmd, { shell: true, stdio: 'ignore' })
+    p.unref()
+    console.log("  id:", p.pid)
+    return p
+  })
+
+  await new Promise(resolve => setTimeout(resolve, 5000))
+
   const selenium = cp.spawn("selenium-standalone start", { shell: true, stdio: 'pipe' })
   console.log("Selenium process id:", selenium.pid)
+
+  selenium.stderr.pipe(process.stderr)
 
   await new Promise(resolve => {
     let log = ''
@@ -32,5 +45,6 @@
   process.on('exit', () => {
     selenium.exitCode ?? selenium.kill()
     hermione.exitCode ?? hermione.kill()
+    for (let p of prcs) p.kill()
   })
 }()
