@@ -15,13 +15,24 @@
   }
 
   const i = process.argv.indexOf("spawn")
-  const prcs = i === -1 ? [] : process.argv.slice(i + 1).map(cmd => {
-    log("spawn", cmd)
-    const p = cp.spawn(cmd, { shell: true, stdio: 'ignore' })
-    p.unref()
-    log("  id:", p.pid)
-    return p
-  })
+  const prcs = []
+
+  if (i !== -1) {
+    for (let q = i + 1; q < process.argv.length; q += 2) {
+      let cmd = process.argv[q]
+      let cwd = process.argv[q + 1]
+
+      log("spawn: ", cmd)
+      log("in:    ", cwd)
+
+      const p = cp.spawn(cmd, { shell: true, stdio: 'ignore', cwd })
+      p.unref()
+
+      log("id:    ", p.pid)
+      console.log()
+      prcs.push(p)
+    }
+  }
 
   await new Promise(resolve => setTimeout(resolve, 5000))
 
