@@ -117,8 +117,7 @@ jobs:
       working-directory: "git/${{env.DIR_INT}}"
 
     - name: Test
-      run: npm test -- spawn "npm run serve -- -s -l 3000 ../../${{env.DIR_SITE}}" "."
-      # "api.exe" "../../${{env.DIR_API}}"
+      run: npm test -- spawn "npm run serve -- -s -l 3000 ../../${{env.DIR_SITE}}" "." "api.exe" "../../${{env.DIR_API}}"
       working-directory: "git/${{env.DIR_INT}}"
 
     - name: Create artifacts
