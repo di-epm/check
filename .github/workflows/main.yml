@@ -102,19 +102,19 @@ jobs:
     
     - run: node -v
     
-    - name: Setup Node.js
-      uses: actions/setup-node@v2
-      with:
-        node-version: '16'
-        cache: 'npm'
-        cache-dependency-path: "./git/${{env.DIR_INT}}"
+    #- name: Setup Node.js
+    #  uses: actions/setup-node@v2
+    #  with:
+    #    node-version: '16'
+    #    cache: 'npm'
+    #    cache-dependency-path: "./git/${{env.DIR_INT}}"
     
     - run: dotnet --version
     
-    - name: Setup .NET
-      uses: actions/setup-dotnet@v1
-      with:
-        dotnet-version: 5.0.x
+    #- name: Setup .NET
+    #  uses: actions/setup-dotnet@v1
+    #  with:
+    #    dotnet-version: 5.0.x
     
     - name: Install dependencies
       run: npm i
