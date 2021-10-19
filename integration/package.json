@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "preinstall": "npm install -g selenium-standalone && selenium-standalone install",
+    "preinstall": "npm install -g selenium-standalone@7.1.0 && selenium-standalone install",
     "hermione": "hermione",
     "serve": "serve",
     "test": "node run-tests"
